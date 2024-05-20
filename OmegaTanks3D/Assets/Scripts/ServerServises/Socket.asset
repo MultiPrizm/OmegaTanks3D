@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c1e8dc5fd7372c4d97c1d4c61cca59c, type: 3}
-  m_Name: SocketDispatcher
+  m_Script: {fileID: 11500000, guid: 715ca8e8219b47e48bb462e7717d2b10, type: 3}
+  m_Name: Socket
   m_EditorClassIdentifier: 
-  serverAddress: 127.0.0.1
-  serverPort: 8888
