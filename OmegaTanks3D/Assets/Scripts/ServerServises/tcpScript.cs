@@ -20,13 +20,24 @@ public class tcpScript : MonoBehaviour
         NetWork = GameObject.FindGameObjectWithTag("NetWork");
 
         router = NetWork.GetComponent<Router>();
-
-        id_ = router.GetID(this);
     }
 
     void Update()
     {
         
+    }
+
+    public void Activate(string id = null)
+    {
+        if (id == null)
+        {
+            id_ = router.GetID(this);
+            return;
+        }
+        else
+        {
+            id_ = id;
+        }
     }
 
     public void PutMes(string mes_)

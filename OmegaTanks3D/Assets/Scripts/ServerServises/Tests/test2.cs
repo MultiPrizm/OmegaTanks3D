@@ -18,6 +18,8 @@ public class test2 : MonoBehaviour
     {
         t = GetComponent<tcpScript>();
 
+        t.Activate();
+
         id = t.Get_ID();
 
         t.send_signal_newmess += GetMess;

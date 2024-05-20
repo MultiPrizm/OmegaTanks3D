@@ -17,6 +17,8 @@ public class test4 : MonoBehaviour
     {
         t = GetComponent<tcpScript>();
 
+        t.Activate();
+
         id = t.Get_ID();
         t.send_signal_newmess += GetMess;
     }
