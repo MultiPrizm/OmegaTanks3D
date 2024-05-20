@@ -22,13 +22,26 @@ public class SocketDispatcher : MonoBehaviour
 
     private void Start()
     {
+        ConnectToServer();
+    }
+
+    public void ConnectToServer()
+    {
         socket.ConnectToServer(serverAddress, serverPort);
-        isConnect = true;
-
         isConnect = socket.GetStatusConnect();
-        stream = socket.GetSocket();
 
-        loop();
+        if (isConnect)
+        {
+            stream = socket.GetSocket();
+
+            loop();
+        }
+    }
+
+    public void DisConnectToServer()
+    {
+        socket.DisconnectFromServer();
+        isConnect = false;
     }
 
     private async void loop()

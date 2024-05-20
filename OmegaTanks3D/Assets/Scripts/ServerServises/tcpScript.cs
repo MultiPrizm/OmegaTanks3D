@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 public class tcpScript : MonoBehaviour
 {
     [SerializeField] private string id_;
+    private GameObject NetWork;
     [SerializeField] private Router router;
 
     private string mes_buffer;
@@ -16,6 +17,10 @@ public class tcpScript : MonoBehaviour
 
     private void Awake()
     {
+        NetWork = GameObject.FindGameObjectWithTag("NetWork");
+
+        router = NetWork.GetComponent<Router>();
+
         id_ = router.GetID(this);
     }
 

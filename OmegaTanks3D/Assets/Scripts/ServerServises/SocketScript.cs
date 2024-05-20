@@ -50,7 +50,7 @@ public class SocketScript : ScriptableObject
 
             onDisConnect?.Invoke();
 
-            Debug.Log("Socket[ INFO : disconnected from server");
+            Debug.Log("Socket[ INFO ]: disconnected from server");
         }
         catch (Exception e)
         {

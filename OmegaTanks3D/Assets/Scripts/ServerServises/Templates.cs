@@ -76,7 +76,7 @@ public class Templates : MonoBehaviour
         public string id = "";
         public string type = "POST";
         public string name = "REG";
-        public string body = "";
+        public string body = "nik_name";
     }
 
     [Serializable]
@@ -127,4 +127,23 @@ public class Templates : MonoBehaviour
         public int code;
         public string body;
     }
+
+    //----JOINLOBBY----
+
+    [Serializable]
+    public class REQUES_JOINLOBBY
+    {
+        public string id = "";
+        public string type = "GET";
+        public string name = "GETLOBBYCODE";
+        public string body = "lobby_id";
+    }
+
+    [Serializable]
+    public class RESPONSE_JOINLOBBY
+    {
+        public int code;
+        public string body;
+    }
+
 }

@@ -9,16 +9,6 @@ public class Router : MonoBehaviour
 
     //[SerializeField] private SocketDispatcher S_D;
 
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-        
-    }
-
     public string GetID(tcpScript script)
     {
         string id;
@@ -43,6 +33,18 @@ public class Router : MonoBehaviour
         using_id.Add(id);
 
         return id;
+    }
+
+    public void SetID(tcpScript script, string id)
+    {
+
+        if (using_id.Contains(id))
+        {
+            Debug.LogError("Router: ErrorID");
+        }
+
+        tcpObjects.Add(id, script);
+        using_id.Add(id);
     }
 
     public void RemoveID(string id)
