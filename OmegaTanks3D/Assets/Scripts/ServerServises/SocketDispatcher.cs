@@ -10,7 +10,6 @@ public class SocketDispatcher : MonoBehaviour
     [SerializeField] private SocketScript socket;
     [SerializeField] private Router router;
 
-    public string serverAddress = "127.0.0.1";
     public int serverPort = 8888;
 
     private TcpClient client;
@@ -25,9 +24,9 @@ public class SocketDispatcher : MonoBehaviour
         
     }
 
-    public bool ConnectToServer()
+    public bool ConnectToServer(string ip)
     {
-        socket.ConnectToServer(serverAddress, serverPort);
+        socket.ConnectToServer(ip, serverPort);
         isConnect = socket.GetStatusConnect();
 
         if (isConnect)
