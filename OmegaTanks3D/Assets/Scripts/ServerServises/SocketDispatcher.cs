@@ -22,10 +22,10 @@ public class SocketDispatcher : MonoBehaviour
 
     private void Start()
     {
-        ConnectToServer();
+        
     }
 
-    public void ConnectToServer()
+    public bool ConnectToServer()
     {
         socket.ConnectToServer(serverAddress, serverPort);
         isConnect = socket.GetStatusConnect();
@@ -35,7 +35,10 @@ public class SocketDispatcher : MonoBehaviour
             stream = socket.GetSocket();
 
             loop();
+            return true;
         }
+
+        return false;
     }
 
     public void DisConnectToServer()

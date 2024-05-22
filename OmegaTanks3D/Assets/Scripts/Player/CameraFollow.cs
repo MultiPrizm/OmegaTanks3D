@@ -9,7 +9,10 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Vector3 moveSettings = new Vector3(0,0,0);
     private void FixedUpdate()
     {
-        Vector3 Target = new Vector3(FollowPlayer.position.x + moveSettings.x, transform.position.y, FollowPlayer.position.z + moveSettings.z);
-        transform.position = Vector3.Lerp(transform.position, Target, followSpeed * Time.deltaTime);
+        if (FollowPlayer != null)
+        {
+            Vector3 Target = new Vector3(FollowPlayer.position.x + moveSettings.x, transform.position.y, FollowPlayer.position.z + moveSettings.z);
+            transform.position = Vector3.Lerp(transform.position, Target, followSpeed * Time.deltaTime);
+        }
     }
 }

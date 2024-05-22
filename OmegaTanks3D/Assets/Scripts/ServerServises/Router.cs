@@ -60,7 +60,10 @@ public class Router : MonoBehaviour
 
             //Debug.Log(res.id);
 
-            tcpObjects[res.id].PutMes(res.response);
+            if (res.id != "")
+            {
+                tcpObjects[res.id].PutMes(res.response);
+            }
         }
         catch (KeyNotFoundException)
         {

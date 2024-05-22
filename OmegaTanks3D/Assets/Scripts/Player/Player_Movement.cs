@@ -48,14 +48,16 @@ public class Player_Movement : MonoBehaviour
             if (_audioSorse.pitch >= 1f) _audioSorse.pitch -= 1f * Time.deltaTime;
         }
     }
-    public Dictionary<string, float> GetStatistick()
+    public Templates.REQUES_UPDATEPLAYER_level3 GetStatistick()
     {
-        Dictionary<string, float> StatistickBase = new Dictionary<string, float>();
+        Templates.REQUES_UPDATEPLAYER_level3 StatistickBase = new Templates.REQUES_UPDATEPLAYER_level3();
 
-        StatistickBase.Add("xPos", transform.position.x);
-        StatistickBase.Add("zPos", transform.position.z);
-        StatistickBase.Add("BaseYRot", transform.rotation.y);
-        StatistickBase.Add("TowerYRot", Tower.transform.rotation.y);
+        StatistickBase.xPos = transform.position.x;
+        StatistickBase.zPos = transform.position.z;
+        StatistickBase.BaseYRot = transform.rotation.y;
+        StatistickBase.TowerYRot = Tower.transform.rotation.y;
+        StatistickBase.xVel = _Rb.velocity.x;
+        StatistickBase.zVel = _Rb.velocity.z;
 
         return StatistickBase;
     }

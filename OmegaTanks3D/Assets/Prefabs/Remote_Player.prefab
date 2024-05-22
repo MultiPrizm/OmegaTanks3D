@@ -49058,6 +49058,7 @@ MonoBehaviour:
   Speed: 5
   RotationSpeed: 15
   _joystick: {fileID: 0}
+  Tower: {fileID: 0}
   tank_idle: {fileID: 8300000, guid: 0148758895105fd4586c5cdd17f60433, type: 3}
   tankDead: {fileID: 8300000, guid: 8cdc3c0c6e5940f4caf43a9b5f461777, type: 3}
 --- !u!82 &2497592151339551653
@@ -49191,6 +49192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76a79cff8f61a8488bb5031fbe9cda2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Tower: {fileID: 5032553378352478404}
 --- !u!1 &5894837051902750876
 GameObject:
   m_ObjectHideFlags: 0

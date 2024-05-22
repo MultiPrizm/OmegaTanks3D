@@ -17,7 +17,6 @@ public class Player_Shooting : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(transform.rotation.y);
         Shooting();
     }
     private void FixedUpdate()

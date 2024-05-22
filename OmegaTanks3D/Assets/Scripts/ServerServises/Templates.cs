@@ -150,6 +150,7 @@ public class Templates : MonoBehaviour
 
     //----GETPLAYERS----
 
+    [Serializable]
     public class REQUES_GETPLAYERS
     {
         public string id = "";
@@ -158,9 +159,46 @@ public class Templates : MonoBehaviour
         public string body = "";
     }
 
+    [Serializable]
     public class RESPONSE_GETPLAYERS
     {
         public int code;
         public List<string> body;
+    }
+
+    //----UPDATEPLAYER----
+
+    [Serializable]
+    public class REQUES_UPDATEPLAYER
+    {
+        public string id = "";
+        public string type = "POST";
+        public string name = "UPDATEPLAYER";
+        public string body = "";
+    }
+
+    [Serializable]
+    public class REQUES_UPDATEPLAYER_level2
+    {
+        public string id = "";
+        public REQUES_UPDATEPLAYER_level3 body;
+    }
+
+    [Serializable]
+    public class REQUES_UPDATEPLAYER_level3
+    {
+        public float xPos;
+        public float zPos;
+        public float BaseYRot;
+        public float TowerYRot;
+        public float xVel;
+        public float zVel;
+    }
+
+    [Serializable]
+    public class RESPONSE_UPDATEPLAYER
+    {
+        public int code;
+        public string body;
     }
 }
