@@ -14,12 +14,18 @@ public class UI_manager : MonoBehaviour
     //Host 
     private string RoomCode = "0o0o0"; // 5-6 symbols
 
-    [SerializeField] private string[] PlayersNames;//need
-    [SerializeField] private TMP_Text[] NamePanelTexsts;//need
     bool lobbyIsStarted = false;
+
+    private tcpScript _tcpSCR;
+    private string id;
     private void Start()
     {
 
+        _tcpSCR = GetComponent<tcpScript>();
+        _tcpSCR.Activate();
+        id = _tcpSCR.Get_ID();
+        _tcpSCR.send_signal_newmess += CheckReg;
+        /*
         if (PlayerPrefs.GetString("PlayerName") != null)
         {
             PlayerName = PlayerPrefs.GetString("PlayerName");
@@ -27,7 +33,7 @@ public class UI_manager : MonoBehaviour
             {
                 InteractiveButtons[i].interactable = true;
             }
-        }
+        }*/
         _OutputText.text = PlayerName;
 
     }
@@ -39,28 +45,12 @@ public class UI_manager : MonoBehaviour
             PlayerPrefs.DeleteAll();
         }
     }
-    private void LateUpdate()
-    {
-        if(lobbyIsStarted == true) { 
-            for (int i = 0; i < NamePanelTexsts.Length; i++)
-            {
-                if (PlayersNames.Length > i) { 
-                    NamePanelTexsts[i].text = PlayersNames[i];
-                    NamePanelTexsts[i].color = Color.white;
-                }
-                if (PlayersNames.Length <= i)
-                {
-                    NamePanelTexsts[i].text = "Empty";
-                    NamePanelTexsts[i].color = new Color(0.007843138f, 0.3686275f, 0.6156863f);
-                }
-            }
-        }
-    }
+
     public void ValiableInput()
     {
         string input = _inputField.text;
-        
-        if(input.Length < 4)
+
+        if (input.Length < 4)
         {
             _OutputText.text = null;
             for (int i = 0; i < InteractiveButtons.Length; i++)
@@ -70,14 +60,34 @@ public class UI_manager : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetString("PlayerName", _inputField.text);
+            //PlayerPrefs.SetString("PlayerName", _inputField.text);
             for (int i = 0; i < InteractiveButtons.Length; i++)
             {
                 InteractiveButtons[i].interactable = true;
             }
-
+            Templates.REQUES_REG reg = new Templates.REQUES_REG();
+            reg.id = id;
+            reg.body = _inputField.text;
+            SocketDispatcher.SendMessageToServer<Templates.REQUES_REG>(reg);
         }
     }
+    public void CheckReg(string type)
+    {
+        Debug.Log("AAAA");
+        if (type == "REG")
+        {
+            Templates.RESPONSE_REG reg = _tcpSCR.GetMes<Templates.RESPONSE_REG>();
+            if (reg.code == 200)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+    }
+
     public void showUI(GameObject UI)
     {
         UI.SetActive(true);

@@ -7,6 +7,7 @@ public class ServerMenu : MonoBehaviour
 {
     [SerializeField] private TMP_InputField _inputField;
     [SerializeField] private TMP_InputField _OutputText;
+    [SerializeField] private GameObject thisMenu;
     private SocketDispatcher _sd;
     private void Start()
     {
@@ -16,12 +17,21 @@ public class ServerMenu : MonoBehaviour
     {
         
     }
-    public void SetIP()
+    public void SetIP(GameObject NextMenu)
     {
         string IP = _inputField.text;
-        if(_sd.ConnectToServer(_inputField.text, 8888))
+        bool thisIP = _sd.ConnectToServer(_inputField.text);
+        if (thisIP == true)
         {
-
+            NextMenu.SetActive(true);
+            thisMenu.SetActive(false);
+            //Debug.Log("gg");
+            Debug.Log(thisIP);
+        }
+        else
+        {
+            _OutputText.text = null;
+            //Debug.Log("gay");
         }
     }
 }
