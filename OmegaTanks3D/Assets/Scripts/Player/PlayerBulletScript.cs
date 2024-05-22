@@ -5,9 +5,16 @@ using UnityEngine;
 public class PlayerBulletScript : MonoBehaviour
 {
     [SerializeField] private float LifeTime = 1f;
+    [SerializeField] private float bulletForce;
     private void Start()
     {
-        StartCoroutine(DIE());
+        Rigidbody rb = GetComponent<Rigidbody>();
+        transform.rotation = Quaternion.Euler(90f, transform.rotation.y, transform.rotation.z);
+        // Calculate the velocity based on the bullet's rotation
+        Vector3 velocity = transform.rotation * Vector3.forward * bulletForce;
+
+        // Apply the calculated velocity to the Rigidbody
+        rb.velocity = velocity;
     }
     private void OnCollisionEnter(Collision collision)
     {
