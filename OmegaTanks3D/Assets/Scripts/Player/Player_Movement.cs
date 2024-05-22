@@ -24,8 +24,8 @@ public class Player_Movement : MonoBehaviour
     }
     private void Update()
     {
-        DirX = _joystick.Horizontal * Speed;
-        DirZ = _joystick.Vertical * Speed;
+        DirX = _joystick.Horizontal * Speed; 
+        DirZ = _joystick.Vertical * Speed; 
     }
     private void FixedUpdate()
     {

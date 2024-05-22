@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LifeTime: 1
-  bulletForce: 0
+  bulletForce: 10
 --- !u!65 &-8985408252095078694
 BoxCollider:
   m_ObjectHideFlags: 0

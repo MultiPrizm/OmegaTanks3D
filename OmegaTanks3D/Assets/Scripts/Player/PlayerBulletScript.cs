@@ -8,8 +8,13 @@ public class PlayerBulletScript : MonoBehaviour
     [SerializeField] private float bulletForce;
     private void Start()
     {
-        StartCoroutine(DIE());
-        GetComponent<Rigidbody>().velocity = transform.up * bulletForce;
+        Rigidbody rb = GetComponent<Rigidbody>();
+        transform.rotation = Quaternion.Euler(90f, transform.rotation.y, transform.rotation.z);
+        // Calculate the velocity based on the bullet's rotation
+        Vector3 velocity = transform.rotation * Vector3.forward * bulletForce;
+
+        // Apply the calculated velocity to the Rigidbody
+        rb.velocity = velocity;
     }
     private void OnCollisionEnter(Collision collision)
     {
