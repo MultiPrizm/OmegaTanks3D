@@ -7,11 +7,9 @@ public class test4 : MonoBehaviour
 {
     private tcpScript t;
     [SerializeField] private string id;
-
-    [SerializeField] private Templates.REQUES_GETLOBBYCODE mes = new Templates.REQUES_GETLOBBYCODE();
+    [SerializeField] private string lobbyCode;
 
     private bool update = true;
-    Templates.RESPONSE_GETLOBBYCODE res;
 
     private void Start()
     {
@@ -26,19 +24,19 @@ public class test4 : MonoBehaviour
     void Update()
     {
 
-
-        send();
     }
 
-    public async void send()
+    public async void createLobby()
     {
         if (update)
         {
             update = false;
 
+            Templates.REQUES_CREATELOBBY mes = new Templates.REQUES_CREATELOBBY();
+
             mes.id = id;
 
-            await SocketDispatcher.SendMessageToServer<Templates.REQUES_GETLOBBYCODE>(mes);
+            await SocketDispatcher.SendMessageToServer<Templates.REQUES_CREATELOBBY>(mes);
 
             await Task.Delay(100);
 
@@ -47,15 +45,43 @@ public class test4 : MonoBehaviour
         }
     }
 
-    public void GetMess()
+    public async void joinLobby()
     {
-        res = t.GetMes<Templates.RESPONSE_GETLOBBYCODE>();
+        if (update)
+        {
+            update = false;
 
-        Debug.Log($@"{res.code}:{res.body}");
+            Templates.REQUES_JOINLOBBY mes = new Templates.REQUES_JOINLOBBY();
+
+            mes.id = id;
+            mes.body = lobbyCode;
+
+            await SocketDispatcher.SendMessageToServer<Templates.REQUES_JOINLOBBY>(mes);
+
+            await Task.Delay(100);
+
+
+            update = true;
+        }
+    }
+
+    public void GetMess(string type)
+    {
+        if(type == "CREATELOBBY")
+        {
+            Templates.RESPONSE_CREATELOBBY res = t.GetMes<Templates.RESPONSE_CREATELOBBY>();
+            Debug.Log($@"test4:{res.code}:{res.body}");
+        }
+        else if(type == "JOINTOLOBBY")
+        {
+            Templates.RESPONSE_JOINLOBBY res = t.GetMes<Templates.RESPONSE_JOINLOBBY>();
+            Debug.Log($@"test4:{res.code}:{res.body}");
+        }  
     }
 
     private void OnDestroy()
     {
         t.send_signal_newmess -= GetMess;
     }
+
 }

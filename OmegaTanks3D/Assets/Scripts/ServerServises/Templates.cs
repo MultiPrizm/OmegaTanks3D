@@ -10,8 +10,10 @@ public class Templates : MonoBehaviour
     public class BaseResponse
     {
         public string id = "";
+        public string name = "";
         public string response = "";
     }
+
     //----PING----
     [Serializable]
     public class REQUES_PING
@@ -134,8 +136,8 @@ public class Templates : MonoBehaviour
     public class REQUES_JOINLOBBY
     {
         public string id = "";
-        public string type = "GET";
-        public string name = "GETLOBBYCODE";
+        public string type = "POST";
+        public string name = "JOINTOLOBBY";
         public string body = "lobby_id";
     }
 
@@ -146,4 +148,19 @@ public class Templates : MonoBehaviour
         public string body;
     }
 
+    //----GETPLAYERS----
+
+    public class REQUES_GETPLAYERS
+    {
+        public string id = "";
+        public string type = "GET";
+        public string name = "GETPLAYERS";
+        public string body = "";
+    }
+
+    public class RESPONSE_GETPLAYERS
+    {
+        public int code;
+        public List<string> body;
+    }
 }

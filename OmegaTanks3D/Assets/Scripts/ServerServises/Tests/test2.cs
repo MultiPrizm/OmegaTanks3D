@@ -27,7 +27,6 @@ public class test2 : MonoBehaviour
 
     void Update()
     {
-        send();
     }
 
     public async void send()
@@ -47,11 +46,11 @@ public class test2 : MonoBehaviour
         }
     }
 
-    public void GetMess()
+    public void GetMess(string type)
     {
         res = t.GetMes<Templates.RESPONSE_GETAPI>();
 
-        Debug.Log($@"{res.code}:{res.body}");
+        Debug.Log($@"test2:{res.code}:{res.body}");
     }
 
     private void OnDestroy()

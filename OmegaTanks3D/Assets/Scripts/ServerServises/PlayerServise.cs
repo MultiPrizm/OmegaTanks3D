@@ -1,37 +1,30 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventSystem : MonoBehaviour
+public class PlayerServise : MonoBehaviour
 {
     private tcpScript tcpS;
     [SerializeField] private string id;
 
-    [SerializeField] private Templates.REQUES_GETLOBBYCODE mes = new Templates.REQUES_GETLOBBYCODE();
-
-    private bool update = true;
-    Templates.RESPONSE_GETLOBBYCODE res;
-
     private delegate void Rule();
-
-    private Dictionary<string, Rule> rules = new Dictionary<string, Rule>();
+    private Dictionary<string, Rule> rules;
 
     private static bool isHost = false;
+
+    [SerializeField] private GameObject playerPrefs;
 
     void Start()
     {
         tcpS = GetComponent<tcpScript>();
 
-        tcpS.Activate("update_system");
+        tcpS.Activate("player_servise");
 
         tcpS.send_signal_newmess += MonitorEvent;
 
-        rules.Add("HOST", setHost);
+        rules.Add("NewPlayer", NewPlayer);
     }
 
-    // Update is called once per frame
-    
     public static bool IsHost()
     {
         return isHost;
@@ -42,8 +35,13 @@ public class EventSystem : MonoBehaviour
 
     }
 
-    private void setHost()
+    public void NewPlayer()
     {
-        isHost = true;
+        GameObject pl = Instantiate(playerPrefs, new Vector3(3231.74f, 2.61f, -2613.95f), Quaternion.identity);
+
+        if (isHost)
+        {
+
+        }
     }
 }

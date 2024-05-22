@@ -11,7 +11,7 @@ public class tcpScript : MonoBehaviour
 
     private string mes_buffer;
 
-    public delegate void new_mess();
+    public delegate void new_mess(string type);
 
     public event new_mess send_signal_newmess;
 
@@ -42,9 +42,11 @@ public class tcpScript : MonoBehaviour
 
     public void PutMes(string mes_)
     {
-        mes_buffer = mes_;
+        Templates.BaseResponse res = JsonUtility.FromJson<Templates.BaseResponse>(mes_);
 
-        send_signal_newmess?.Invoke();
+        mes_buffer = res.response;
+
+        send_signal_newmess?.Invoke(res.name);
     }
 
     public T GetMes<T>()

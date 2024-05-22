@@ -8,10 +8,7 @@ public class test : MonoBehaviour
     private tcpScript t;
     [SerializeField] private string id;
 
-    [SerializeField] private Templates.REQUES_CREATELOBBY mes = new Templates.REQUES_CREATELOBBY();
-
     private bool update = true;
-    Templates.RESPONSE_CREATELOBBY res;
 
     private void Start()
     {
@@ -21,14 +18,12 @@ public class test : MonoBehaviour
 
         id = t.Get_ID();
         t.send_signal_newmess += GetMess;
-
-        //send();
-        StartCoroutine(foo());
+        send();
     }
 
     void Update()
     {
-        send();
+        //send();
     }
 
     public async void send()
@@ -37,9 +32,11 @@ public class test : MonoBehaviour
         {
             update = false;
 
+            Templates.REQUES_GETLOBBYCODE mes = new Templates.REQUES_GETLOBBYCODE();
+
             mes.id = id;
 
-            await SocketDispatcher.SendMessageToServer<Templates.REQUES_CREATELOBBY>(mes);
+            await SocketDispatcher.SendMessageToServer<Templates.REQUES_GETLOBBYCODE>(mes);
 
             await Task.Delay(100);
 
@@ -48,22 +45,15 @@ public class test : MonoBehaviour
         }
     }
 
-    public void GetMess()
+    public void GetMess(string type)
     {
-        res = t.GetMes<Templates.RESPONSE_CREATELOBBY>();
+        Templates.RESPONSE_GETLOBBYCODE res = t.GetMes<Templates.RESPONSE_GETLOBBYCODE>();
 
-        Debug.Log($@"{res.code}:{res.body}");
+        Debug.Log($@"test1:{res.code}:{res.body}");
     }
 
     private void OnDestroy()
     {
         t.send_signal_newmess -= GetMess;
-    }
-
-    private IEnumerator foo()
-    {
-        yield return new WaitForSeconds(2);
-        Debug.Log("1");
-        send();
     }
 }

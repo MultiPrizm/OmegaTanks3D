@@ -8,10 +8,10 @@ public class test3 : MonoBehaviour
     private tcpScript t;
     [SerializeField] private string id;
 
-    [SerializeField] private Templates.REQUES_PING mes = new Templates.REQUES_PING();
+    [SerializeField] private Templates.REQUES_GETPLAYERS mes = new Templates.REQUES_GETPLAYERS();
 
     private bool update = true;
-    Templates.RESPONSE_PING res;
+    Templates.RESPONSE_GETPLAYERS res;
 
     private void Start()
     {
@@ -26,8 +26,6 @@ public class test3 : MonoBehaviour
     void Update()
     {
         
-
-        send();
     }
 
     public async void send()
@@ -38,7 +36,7 @@ public class test3 : MonoBehaviour
 
             mes.id = id;
 
-            await SocketDispatcher.SendMessageToServer<Templates.REQUES_PING>(mes);
+            await SocketDispatcher.SendMessageToServer<Templates.REQUES_GETPLAYERS>(mes);
 
             await Task.Delay(100);
 
@@ -47,11 +45,18 @@ public class test3 : MonoBehaviour
         }
     }
 
-    public void GetMess()
+    public void GetMess(string type)
     {
-        res = t.GetMes<Templates.RESPONSE_PING>();
+        res = t.GetMes<Templates.RESPONSE_GETPLAYERS>();
 
-        Debug.Log($@"{res.code}:{res.body}");
+        Debug.Log($@"test3:{res.code}");
+
+        foreach (var i in res.body)
+        {
+            Debug.Log($@"test3:{i}");
+        }
+
+        
     }
 
     private void OnDestroy()
