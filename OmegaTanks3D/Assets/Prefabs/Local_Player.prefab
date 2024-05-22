@@ -44201,7 +44201,6 @@ MonoBehaviour:
   bullet_prefab: {fileID: 1289775717473216, guid: d745a1b5e401d3443bf71946b7847640,
     type: 3}
   bullet_spawn: {fileID: 7092526506408200328}
-  bulletForce: 10
   timeAfterShot: 1
 --- !u!1 &5207777323971897992
 GameObject:
@@ -49058,6 +49057,7 @@ MonoBehaviour:
   Speed: 5
   RotationSpeed: 15
   _joystick: {fileID: 0}
+  Tower: {fileID: 5032553378352478404}
   tank_idle: {fileID: 8300000, guid: 0148758895105fd4586c5cdd17f60433, type: 3}
   tankDead: {fileID: 8300000, guid: 8cdc3c0c6e5940f4caf43a9b5f461777, type: 3}
 --- !u!82 &2497592151339551653
@@ -49460,7 +49460,6 @@ MonoBehaviour:
   _joystick: {fileID: 0}
   bullet_prefab: {fileID: 0}
   bullet_spawn: {fileID: 0}
-  bulletForce: 0
   timeAfterShot: 0.25
 --- !u!1 &7092526506408200328
 GameObject:

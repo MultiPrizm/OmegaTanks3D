@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player_Movement : MonoBehaviour
@@ -7,9 +8,9 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private float Speed = 1f;
     [SerializeField] private float RotationSpeed = 1f;
     [SerializeField] private Joystick _joystick; // Vector2
+    [Header("Tower")]
+    [SerializeField] private GameObject Tower;
 
-    
-    
     private Rigidbody _Rb;
     [Header("Sounds")]
     [SerializeField] private AudioClip tank_idle;
@@ -46,5 +47,16 @@ public class Player_Movement : MonoBehaviour
         {
             if (_audioSorse.pitch >= 1f) _audioSorse.pitch -= 1f * Time.deltaTime;
         }
+    }
+    public Dictionary<string, float> GetStatistick()
+    {
+        Dictionary<string, float> StatistickBase = new Dictionary<string, float>();
+
+        StatistickBase.Add("xPos", transform.position.x);
+        StatistickBase.Add("zPos", transform.position.z);
+        StatistickBase.Add("BaseYRot", transform.rotation.y);
+        StatistickBase.Add("TowerYRot", Tower.transform.rotation.y);
+
+        return StatistickBase;
     }
 }
