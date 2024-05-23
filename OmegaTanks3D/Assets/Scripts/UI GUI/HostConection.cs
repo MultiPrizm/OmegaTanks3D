@@ -7,11 +7,16 @@ public class HostConnection : MonoBehaviour
 {
     private tcpScript _tcpScript;
     private string _id;
-    [SerializeField] private GameObject showMenu;
-    [SerializeField] private GameObject hideMenu;
+    [SerializeField] private GameObject showMenu;//HOST
+    [SerializeField] private GameObject hideMenu;//HOST
     [SerializeField] private List<string> playersNames = new List<string>();
     [SerializeField] private TMP_Text[] namePanelTexts;
     [SerializeField] private TMP_Text roomCodeText;
+
+    [Header("Join Menu")]
+    [SerializeField] private GameObject hideJoinMenu;
+    [SerializeField] private TMP_InputField roomCodeInput;
+    [SerializeField] private GameObject HidenButtonStart;
 
     private void Start()
     {
@@ -40,23 +45,38 @@ public class HostConnection : MonoBehaviour
             case "CREATELOBBY":
                 HandleCreateLobby();
                 break;
+            case "JOINTOLOBBY":
+                HandleGetJoin();
+                break;
             default:
                 Debug.LogWarning("Unknown message type received: " + type);
                 break;
+
         }
     }
-
+    private void HandleGetJoin()
+    {
+        Templates.RESPONSE_JOINLOBBY response = _tcpScript.GetMes<Templates.RESPONSE_JOINLOBBY>();
+        if (response.code == 200)
+        {
+            showMenu.SetActive(true);
+            hideJoinMenu.SetActive(false);
+            HidenButtonStart.SetActive(false);
+            ShowRoom();
+            StartCoroutine(PlayersListState());
+            Debug.Log("ITS WORK!11");
+        }
+    }
     private void HandleGetLobbyCode()
     {
-        Debug.Log("SSSS");
+        //Debug.Log("SSSS");
         Templates.RESPONSE_GETLOBBYCODE response = _tcpScript.GetMes<Templates.RESPONSE_GETLOBBYCODE>();
         if (response.code == 200)
         {
             roomCodeText.text = response.body;
-            
+
         }
     }
-
     private void HandleGetPlayers()
     {
         Templates.RESPONSE_GETPLAYERS response = _tcpScript.GetMes<Templates.RESPONSE_GETPLAYERS>();
@@ -82,7 +102,12 @@ public class HostConnection : MonoBehaviour
             //Debug.LogError("Failed to create lobby. Error code: " + response.code);
         }
     }
-
+    public void JoinRoom()
+    {
+        string roomCode = roomCodeInput.text;
+        Templates.REQUES_JOINLOBBY request = new Templates.REQUES_JOINLOBBY { id = _id, body = roomCodeInput.text };
+        SocketDispatcher.SendMessageToServer(request);
+    }
     public void HostRoom()
     {
         Templates.REQUES_CREATELOBBY request = new Templates.REQUES_CREATELOBBY { id = _id };
@@ -91,14 +116,10 @@ public class HostConnection : MonoBehaviour
 
     private void ShowRoom()
     {
+        Debug.Log("puk puk kak kak");
         Templates.REQUES_GETLOBBYCODE request = new Templates.REQUES_GETLOBBYCODE { id = _id };
         SocketDispatcher.SendMessageToServer(request);
-        SocketDispatcher.SendMessageToServer(request);
-        SocketDispatcher.SendMessageToServer(request);
-        SocketDispatcher.SendMessageToServer(request);
-        Debug.Log(request.name);
-        Debug.Log(request.name);
-        Debug.Log(request.name);
+        //Debug.Log(request.name);
     }
 
     private void UpdatePlayerList()
