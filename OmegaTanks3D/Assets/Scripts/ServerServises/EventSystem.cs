@@ -41,6 +41,7 @@ public class EventSystem : MonoBehaviour
     public void MonitorEvent(string type)
     {
         rules[type]();
+        Debug.Log(type + " GAY SEX");
     }
 
     private void StartGame()
