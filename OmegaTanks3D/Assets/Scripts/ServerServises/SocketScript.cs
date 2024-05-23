@@ -30,6 +30,7 @@ public class SocketScript : ScriptableObject
         }
         catch (Exception e)
         {
+            isConnected = false;
             Debug.Log("Socket[ ERROR ]:Fail connect => " + e.Message);
         }
     }
