@@ -5,13 +5,17 @@ using System.Threading.Tasks;
 
 public class test : MonoBehaviour
 {
+
     private tcpScript t;
     [SerializeField] private string id;
+
+    [SerializeField] private SocketDispatcher _sd;
 
     private bool update = true;
 
     private void Start()
     {
+        _sd.ConnectToServer("127.0.0.1");
         t = GetComponent<tcpScript>();
 
         t.Activate();
@@ -32,11 +36,11 @@ public class test : MonoBehaviour
         {
             update = false;
 
-            Templates.REQUES_GETLOBBYCODE mes = new Templates.REQUES_GETLOBBYCODE();
+            Templates.REQUES_CREATELOBBY mes = new Templates.REQUES_CREATELOBBY();
 
             mes.id = id;
 
-            await SocketDispatcher.SendMessageToServer<Templates.REQUES_GETLOBBYCODE>(mes);
+            await SocketDispatcher.SendMessageToServer<Templates.REQUES_CREATELOBBY>(mes);
 
             await Task.Delay(100);
 
@@ -47,7 +51,7 @@ public class test : MonoBehaviour
 
     public void GetMess(string type)
     {
-        Templates.RESPONSE_GETLOBBYCODE res = t.GetMes<Templates.RESPONSE_GETLOBBYCODE>();
+        Templates.RESPONSE_CREATELOBBY res = t.GetMes<Templates.RESPONSE_CREATELOBBY>();
 
         Debug.Log($@"test1:{res.code}:{res.body}");
     }
