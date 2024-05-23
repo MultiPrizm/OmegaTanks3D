@@ -49,7 +49,7 @@ public class HostConnection : MonoBehaviour
                 HandleGetJoin();
                 break;
             default:
-                Debug.LogWarning("Unknown message type received: " + type);
+               // Debug.LogWarning("Unknown message type received: " + type);
                 break;
 
         }
@@ -121,7 +121,11 @@ public class HostConnection : MonoBehaviour
         SocketDispatcher.SendMessageToServer(request);
         //Debug.Log(request.name);
     }
-
+    public void StartGame()
+    {
+        Templates.REQUES_STARTGAME request = new Templates.REQUES_STARTGAME { id = _id };
+        SocketDispatcher.SendMessageToServer(request);
+    }
     private void UpdatePlayerList()
     {
         for (int i = 0; i < namePanelTexts.Length; i++)
@@ -138,7 +142,7 @@ public class HostConnection : MonoBehaviour
             }
         }
     }
-
+    
     private IEnumerator PlayersListState()
     {
         while (true)

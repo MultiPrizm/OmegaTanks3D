@@ -201,4 +201,19 @@ public class Templates : MonoBehaviour
         public int code;
         public string body;
     }
+
+    //----STARTGAME----
+
+    public class REQUES_STARTGAME
+    {
+        public string id = "";
+        public string type = "POST";
+        public string name = "STARTGAME";
+        public string body = "";
+    }
+
+    public class RESPONSE_STARTGAME
+    {
+        public int code;
+    }
 }
