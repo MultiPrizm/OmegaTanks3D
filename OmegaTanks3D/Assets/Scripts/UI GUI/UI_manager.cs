@@ -50,7 +50,7 @@ public class UI_manager : MonoBehaviour
     {
         string input = _inputField.text;
 
-        if (input.Length < 4)
+        if (input.Length < 4 && input.Length > 25)
         {
             _OutputText.text = null;
             for (int i = 0; i < InteractiveButtons.Length; i++)

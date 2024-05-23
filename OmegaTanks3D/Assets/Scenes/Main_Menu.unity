@@ -1344,6 +1344,9 @@ MonoBehaviour:
   - {fileID: 1201458821}
   - {fileID: 402284693}
   roomCodeText: {fileID: 1914931809}
+  hideJoinMenu: {fileID: 1575621359}
+  roomCodeInput: {fileID: 7146705}
+  HidenButtonStart: {fileID: 1970852063}
 --- !u!1 &275466863
 GameObject:
   m_ObjectHideFlags: 0
@@ -8235,7 +8238,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 238.05118, y: 74.07544}
+  m_SizeDelta: {x: 548.54, y: 74.07544}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1914931809
 MonoBehaviour:
@@ -9306,25 +9309,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1762570544}
-        m_TargetAssemblyTypeName: UI_manager, Assembly-CSharp
-        m_MethodName: showUI
-        m_Mode: 2
+      - m_Target: {fileID: 242914372}
+        m_TargetAssemblyTypeName: HostConnection, Assembly-CSharp
+        m_MethodName: JoinRoom
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 2123920574}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1762570544}
-        m_TargetAssemblyTypeName: UI_manager, Assembly-CSharp
-        m_MethodName: makeUIInvisuable
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1575621359}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
