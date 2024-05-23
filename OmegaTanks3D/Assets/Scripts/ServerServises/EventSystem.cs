@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EventSystem : MonoBehaviour
 {
@@ -23,11 +24,11 @@ public class EventSystem : MonoBehaviour
     {
         tcpS = GetComponent<tcpScript>();
 
-        tcpS.Activate("update_system");
+        tcpS.Activate("EventSystem");
 
         tcpS.send_signal_newmess += MonitorEvent;
 
-        rules.Add("HOST", setHost);
+        rules.Add("STARTGAME", StartGame);
     }
 
     // Update is called once per frame
@@ -39,11 +40,11 @@ public class EventSystem : MonoBehaviour
 
     public void MonitorEvent(string type)
     {
-
+        rules[type]();
     }
 
-    private void setHost()
+    private void StartGame()
     {
-        isHost = true;
+        SceneManager.LoadScene(1);
     }
 }
