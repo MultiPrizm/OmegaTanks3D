@@ -8,16 +8,13 @@ public class SCT_Shell : MonoBehaviour {
 	public ParticleSystem m_ExplosionParticles;         // Reference to the particles that will play on explosion.
 	public AudioSource m_ExplosionAudio;             
 	void OnTriggerEnter(Collider col){
-  
- 
 
-		// Play the particle system.
+
+		GetComponent<Rigidbody>().velocity = Vector3.zero;
+		GetComponent<Collider>().enabled = false;
+		GetComponentInChildren<Renderer>().enabled = false;
 		m_ExplosionParticles.Play();
-		// Play the explosion sound effect.
 		m_ExplosionAudio.Play();
-		GetComponent<Rigidbody> ().velocity =Vector3.zero;
-		GetComponent<Collider> ().enabled = false;
-		GetComponent<Renderer> ().enabled = false;
 	 	Destroy (gameObject, 2);	 
 
  

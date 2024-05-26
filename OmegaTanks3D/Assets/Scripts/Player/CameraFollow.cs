@@ -7,6 +7,13 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float followSpeed = 5f;
     [SerializeField] private Transform FollowPlayer;
     [SerializeField] private Vector3 moveSettings = new Vector3(0,0,0);
+    private void Start()
+    {
+        if (FollowPlayer == null && GameObject.FindGameObjectWithTag("Player") != null)
+        {
+            FollowPlayer = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+    }
     private void FixedUpdate()
     {
         if (FollowPlayer != null)
