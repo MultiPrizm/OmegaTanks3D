@@ -25,13 +25,11 @@ public class ServerMenu : MonoBehaviour
         {
             NextMenu.SetActive(true);
             thisMenu.SetActive(false);
-            //Debug.Log("gg");
             Debug.Log(thisIP);
         }
         else
         {
             _OutputText.text = null;
-            //Debug.Log("gay");
         }
     }
 }

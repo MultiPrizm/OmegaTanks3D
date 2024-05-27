@@ -35,7 +35,7 @@ public class tcpScript : MonoBehaviour
         }
         else
         {
-            id_ = id;
+            id_ = router.SetID(this, id);
         }
     }
 

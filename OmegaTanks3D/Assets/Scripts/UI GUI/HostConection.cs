@@ -33,7 +33,6 @@ public class HostConnection : MonoBehaviour
 
     public void CheckMessage(string type)
     {
-        Debug.Log(type);
         switch (type)
         {
             case "GETLOBBYCODE":
@@ -64,12 +63,10 @@ public class HostConnection : MonoBehaviour
             HidenButtonStart.SetActive(false);
             ShowRoom();
             StartCoroutine(PlayersListState());
-            Debug.Log("ITS WORK!11");
         }
     }
     private void HandleGetLobbyCode()
     {
-        //Debug.Log("SSSS");
         Templates.RESPONSE_GETLOBBYCODE response = _tcpScript.GetMes<Templates.RESPONSE_GETLOBBYCODE>();
         if (response.code == 200)
         {
@@ -116,7 +113,6 @@ public class HostConnection : MonoBehaviour
 
     private void ShowRoom()
     {
-        Debug.Log("puk puk kak kak");
         Templates.REQUES_GETLOBBYCODE request = new Templates.REQUES_GETLOBBYCODE { id = _id };
         SocketDispatcher.SendMessageToServer(request);
         //Debug.Log(request.name);

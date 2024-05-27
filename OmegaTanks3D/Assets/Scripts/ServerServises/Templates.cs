@@ -187,12 +187,12 @@ public class Templates : MonoBehaviour
     [Serializable]
     public class REQUES_UPDATEPLAYER_level3
     {
-        public float xPos;
-        public float zPos;
-        public float BaseYRot;
-        public float TowerYRot;
-        public float xVel;
-        public float zVel;
+        public float xPos = 0f;
+        public float zPos = 0f;
+        public float BaseYRot = 0f;
+        public float TowerYRot = 0f;
+        public float xVel = 0f;
+        public float zVel = 0f;
     }
 
     [Serializable]
@@ -204,6 +204,7 @@ public class Templates : MonoBehaviour
 
     //----STARTGAME----
 
+    [Serializable]
     public class REQUES_STARTGAME
     {
         public string id = "";
@@ -212,8 +213,63 @@ public class Templates : MonoBehaviour
         public string body = "";
     }
 
+    [Serializable]
     public class RESPONSE_STARTGAME
     {
         public int code;
+    }
+
+    //----GETGAMESTATUS----
+
+    [Serializable]
+    public class REQUES_GETGAMESTATUS
+    {
+        public string id = "";
+        public string type = "GET";
+        public string name = "GETSTATUSGAME";
+        public string body = "";
+    }
+
+    [Serializable]
+    public class RESPONSE_GETGAMESTATUS
+    {
+        public int code;
+        public string body;
+    }
+
+    //----LOADPLAYER---
+
+    [Serializable]
+    public class REQUES_LOADPLAYER
+    {
+        public string id = "";
+        public string type = "POST";
+        public string name = "LOADPLAYER";
+        public string body = "";
+    }
+
+    [Serializable]
+    public class REQUES_LOADPLAYER_level2
+    {
+        public string id = "";
+        public REQUES_UPDATEPLAYER_level3 body;
+    }
+
+    [Serializable]
+    public class REQUES_LOADPLAYER_level3
+    {
+        public float xPos;
+        public float zPos;
+        public float BaseYRot;
+        public float TowerYRot;
+        public float xVel;
+        public float zVel;
+    }
+
+    [Serializable]
+    public class RESPONSE_LOADPLAYER
+    {
+        public int code;
+        public string body;
     }
 }

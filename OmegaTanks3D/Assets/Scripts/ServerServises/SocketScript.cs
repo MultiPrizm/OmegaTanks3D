@@ -63,9 +63,4 @@ public class SocketScript : ScriptableObject
     {
         return stream;
     }
-
-    void OnDestroy()
-    {
-        DisconnectFromServer();
-    }
 }

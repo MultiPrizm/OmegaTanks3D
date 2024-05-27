@@ -16,7 +16,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private AudioClip tank_idle;
     [SerializeField] private AudioClip tankDead;
     private AudioSource _audioSorse;
-    private void Start()
+    private void Awake()
     {
         _audioSorse = GetComponent<AudioSource>();
         _Rb = GetComponent<Rigidbody>();

@@ -7,7 +7,10 @@ public class Router : MonoBehaviour
     private List<string> using_id = new List<string>();
     private Dictionary<string, tcpScript> tcpObjects = new Dictionary<string, tcpScript>();
 
-    //[SerializeField] private SocketDispatcher S_D;
+    private void Start()
+    {
+        Debug.Log("NetWork[ OK ]:Router loaded");
+    }
 
     public string GetID(tcpScript script)
     {
@@ -35,7 +38,7 @@ public class Router : MonoBehaviour
         return id;
     }
 
-    public void SetID(tcpScript script, string id)
+    public string SetID(tcpScript script, string id)
     {
 
         if (using_id.Contains(id))
@@ -45,6 +48,8 @@ public class Router : MonoBehaviour
 
         tcpObjects.Add(id, script);
         using_id.Add(id);
+
+        return id;
     }
 
     public void RemoveID(string id)
@@ -58,8 +63,6 @@ public class Router : MonoBehaviour
         {
             Templates.BaseResponse res = JsonUtility.FromJson<Templates.BaseResponse>(mes);
 
-            //Debug.Log(res.id);
-
             if (res.id != "")
             {
                 tcpObjects[res.id].PutMes(res.response);
@@ -67,7 +70,8 @@ public class Router : MonoBehaviour
         }
         catch (KeyNotFoundException)
         {
-
+            Templates.BaseResponse res = JsonUtility.FromJson<Templates.BaseResponse>(mes);
+            Debug.Log($@"Router: id not found:{res.id}");
         }
     }
 }

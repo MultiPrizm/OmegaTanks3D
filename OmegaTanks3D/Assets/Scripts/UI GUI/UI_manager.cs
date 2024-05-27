@@ -20,7 +20,6 @@ public class UI_manager : MonoBehaviour
     private string id;
     private void Start()
     {
-
         _tcpSCR = GetComponent<tcpScript>();
         _tcpSCR.Activate();
         id = _tcpSCR.Get_ID();
@@ -73,7 +72,6 @@ public class UI_manager : MonoBehaviour
     }
     public void CheckReg(string type)
     {
-        Debug.Log("AAAA");
         if (type == "REG")
         {
             Templates.RESPONSE_REG reg = _tcpSCR.GetMes<Templates.RESPONSE_REG>();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 public class LocalPlayer : MonoBehaviour
 {
     private tcpScript tcpS;
-    [SerializeField] private string id;
+    [SerializeField] private string _id;
 
     [SerializeField] private GameObject LocalPlPref;
     private Player_Movement localPlayer;
@@ -14,9 +14,9 @@ public class LocalPlayer : MonoBehaviour
     private Templates.REQUES_UPDATEPLAYER updatePlayer;
     private Templates.REQUES_UPDATEPLAYER_level2 updatePlayerLevel2;
 
-    private bool update = true;
+    private bool active = false;
 
-    private void Start()
+    private void Awake()
     {
         tcpS = GetComponent<tcpScript>();
 
@@ -24,32 +24,40 @@ public class LocalPlayer : MonoBehaviour
         updatePlayerLevel2 = new Templates.REQUES_UPDATEPLAYER_level2();
 
         tcpS.Activate();
-        id = tcpS.Get_ID();
+        _id = tcpS.Get_ID();
 
-        updatePlayerLevel2.id = id;
-        SpawnPlayer();
+        updatePlayerLevel2.id = _id;
     }
 
     private void Update()
     {
-        SendStatistick();
+        if (active) Activate();
     }
 
-    private async void SendStatistick()
+    public void Load()
     {
-        if (update && localPlayer != null)
-        {
-            update = false;
+        SpawnPlayer();
+        Templates.REQUES_LOADPLAYER load_req = new Templates.REQUES_LOADPLAYER {id = _id};
 
-            updatePlayerLevel2.body = localPlayer.GetStatistick();
+        Templates.REQUES_LOADPLAYER_level2 level2 = new Templates.REQUES_LOADPLAYER_level2();
 
-            updatePlayer.body = JsonUtility.ToJson(updatePlayerLevel2);
+        level2.id = _id;
+        level2.body = localPlayer.GetStatistick();
 
-            await SocketDispatcher.SendMessageToServer<Templates.REQUES_UPDATEPLAYER>(updatePlayer);
+        load_req.body = JsonUtility.ToJson(level2);
 
-            await Task.Delay(100);
-            update = true;
-        }
+        SocketDispatcher.SendMessageToServer<Templates.REQUES_LOADPLAYER>(load_req);
+    }
+
+    public void Activate()
+    {
+        active = true;
+
+        updatePlayerLevel2.body = localPlayer.GetStatistick();
+
+        updatePlayer.body = JsonUtility.ToJson(updatePlayerLevel2);
+
+        SocketDispatcher.SendMessageToServer<Templates.REQUES_UPDATEPLAYER>(updatePlayer);
     }
     private void SpawnPlayer()
     {

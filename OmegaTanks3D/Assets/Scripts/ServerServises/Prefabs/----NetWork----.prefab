@@ -136,6 +136,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8620060560792237094}
+  - component: {fileID: 1114337972991032390}
+  - component: {fileID: 8559141973932436172}
   m_Layer: 0
   m_Name: PlayersServise
   m_TagString: Untagged
@@ -158,3 +160,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6567727231302752735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1114337972991032390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8168493410768493264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb7a9b0f04c9afc418c22e588613dbef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 
+  playerPrefs: {fileID: 0}
+--- !u!114 &8559141973932436172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8168493410768493264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d08ec9aecb486304fb51f2cac949069c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id_: 
+  router: {fileID: 0}

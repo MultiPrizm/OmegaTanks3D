@@ -21,7 +21,9 @@ public class SocketDispatcher : MonoBehaviour
 
     private void Start()
     {
-        
+        Debug.Log("NetWork[ OK ]:SocketDispatcher loaded");
+
+        isConnect = socket.GetStatusConnect();
     }
 
     public bool ConnectToServer(string ip)
@@ -122,6 +124,11 @@ public class SocketDispatcher : MonoBehaviour
 
         // Кінець потоку без знайденого роздільника
         return buffer.ToArray();
+    }
+
+    private void OnDestroy()
+    {
+        isConnect = false;
     }
 
     void OnApplicationQuit()
